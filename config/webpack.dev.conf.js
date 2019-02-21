@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const mocker = require('../mock')
+const proxy = require('../mock/proxy')
 
 module.exports = merge(baseWebpackConfig, {
     mode: 'development',
@@ -54,7 +55,7 @@ module.exports = merge(baseWebpackConfig, {
         https: false,
         noInfo: true,
         open: false,
-        proxy: {},
+        proxy: proxy,
         before(app){
             mocker(app)
         }
