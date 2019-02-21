@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode=development --open --hot",
     "dev": "webpack-dev-server --config config/webpack.dev.conf.js",
-    "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.conf.js --progress --hide-modules",
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.conf.js --hide-modules",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

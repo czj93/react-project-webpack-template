@@ -1,6 +1,10 @@
 import React from 'react'
 import { hot } from 'react-hot-loader'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd'
+// import Layout from 'antd/lib/layout'
+// import Menu from 'antd/lib/menu'
+// import Breadcrumb from 'antd/lib/breadcrumb'
+// import Icon from 'antd/lib/icon'
 import { HashRouter, Link } from 'react-router-dom';
 // import Nav from './components/nav.js'
 
