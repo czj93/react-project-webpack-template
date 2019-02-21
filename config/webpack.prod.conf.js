@@ -15,7 +15,7 @@ module.exports = merge(baseWebpackConfig, {
         path: path.resolve(__dirname, "../dist"),
         filename: 'js/[name].[contenthash].js',
         chunkFilename: "js/[name].[contenthash].js",
-        publicPath: 'https://caozj.cn/webpack-tempalte-demo/',
+        publicPath: 'https://caozj.cn/webpack-demo/',
     },
     optimization:{
         minimizer: [
