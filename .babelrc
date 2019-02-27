@@ -12,11 +12,17 @@
   "env": {
     "development": {
       "plugins": [
-        "react-hot-loader/babel",  //开启模块热替换
+        "react-hot-loader/babel"
       ]
     },
+    "production": {
+      "plugins": [
+        "transform-react-remove-prop-types"
+      ]
+    }
   },
   "plugins": [
-    "@babel/plugin-syntax-dynamic-import"
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties"
   ]
 }
