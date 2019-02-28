@@ -16,15 +16,4 @@ store = (initState = {}) => {
     )
 }
 
-export default store({
-    routing : {
-        history,
-        tabs : {
-            panes : []
-        },
-        menus : {
-            openKeys : [],
-            selectedKeys : []
-        }
-    }
-})
+export default store({})

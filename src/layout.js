@@ -7,18 +7,18 @@ import { Layout, Breadcrumb } from 'antd'
 // import Icon from 'antd/lib/icon'
 import { HashRouter } from 'react-router-dom';
 import SiderBar from './components/SiderBar'
-import Nav from './components/nav'
+import Nav from './components/Nav'
 // import Nav from './components/nav.js'
 
 // import img from './assets/images/img.jpg'
 
 const { Header, Content } = Layout;
 
-import Router from './router/'
+import Router from './router'
 
 require('./assets/css/index.css')
 
-class App extends React.Component {
+class AppLayout extends React.Component {
     constructor(props){
         super(props)
     }
@@ -39,10 +39,7 @@ class App extends React.Component {
                                 <Breadcrumb.Item>List</Breadcrumb.Item>
                                 <Breadcrumb.Item>App</Breadcrumb.Item>
                             </Breadcrumb>
-                            <Content style={{
-                                background: '#fff', padding: 24, margin: 0, minHeight: 280,
-                                }}
-                                >
+                            <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }} >
                                 <Router />
                             </Content>
                         </Layout>
@@ -53,7 +50,7 @@ class App extends React.Component {
     }
 }
 
-export default hot(module)(App)
+export default hot(module)(AppLayout)
 // export default App
 
 // if(process.env.NODE_ENV !== 'production'){

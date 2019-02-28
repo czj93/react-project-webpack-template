@@ -1,21 +1,26 @@
 import React from 'react'
 import { Menu } from 'antd'
-import { Link } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 class Nav extends React.Component {
-    
+    constructor(props){
+        super(props)
+        // console.log(props)
+    }
     render(){
+        let selectedKey = this.props.location.path ? this.props.location.path : ''
         return (
             <Menu
                 theme="dark"
                 mode="horizontal"
-                defaultSelectedKeys={['1']}
+                defaultSelectedKeys={[selectedKey]}
                 style={{ lineHeight: '64px' }}
             >
-                <Menu.Item key="1"><Link to="/home">Home</Link></Menu.Item>
-                <Menu.Item key="2"><Link to="/todolist">TodoList</Link></Menu.Item>
+                <Menu.Item key="/home"><NavLink to="/home">Home</NavLink></Menu.Item>
+                <Menu.Item key="/todolist"><NavLink to="/todolist">TodoList</NavLink></Menu.Item>
+                <Menu.Item key="/user"><NavLink to="/user">用户列表</NavLink></Menu.Item>
             </Menu>
         )
     }
 }
 
-export default Nav
+export default withRouter(Nav)

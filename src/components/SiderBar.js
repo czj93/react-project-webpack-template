@@ -1,5 +1,7 @@
 import React from 'react'
 import { Layout, Menu, Icon } from 'antd'
+import { NavLink, withRouter } from 'react-router-dom';
+import SiderBarConfig from '../config/sidebar'
 
 
 const { SubMenu } = Menu;
@@ -7,33 +9,52 @@ const { Sider } = Layout;
 
 
 class SiderBar extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            menu: SiderBarConfig
+        }
+    }
+
+
+    formSubmenusChild(item){
+        let cHtml;
+        if(item.children && item.children.length > 0) {
+            cHtml = item.children.map((it, i) => {
+                return this.formSubmenusChild(it);
+            });
+            return (
+                <SubMenu key={item.key} title={<span>{item.name}</span>}>
+                    {cHtml}
+                </SubMenu>
+            )
+        }else{
+            return (
+                <Menu.Item key={item.key}>
+                    <NavLink exact to={ item.path  }>
+                        <span className="nav-text">{item.name}</span>
+                    </NavLink>
+                </Menu.Item>
+            )
+        }
+    }
+
     render(){
+        var curMenu = this.state.menu.find(item => '/'+item.key == this.props.location.pathname ) || []
+        let html = ''
+        html = curMenu.children && curMenu.children.map((item,i)=> {
+            return this.formSubmenusChild(item);
+        });
+
         return (
             <Sider width={200} style={{ background: '#fff' }}>
                 <Menu
-                mode="inline"
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
-                style={{ height: '100%', borderRight: 0 }}
+                    mode="inline"
+                    defaultSelectedKeys={['1']}
+                    defaultOpenKeys={['sub1']}
+                    style={{ height: '100%', borderRight: 0 }}
                 >
-                <SubMenu key="sub1" title={<span><Icon type="user" />subnav 1</span>}>
-                    <Menu.Item key="1">option1</Menu.Item>
-                    <Menu.Item key="2">option2</Menu.Item>
-                    <Menu.Item key="3">option3</Menu.Item>
-                    <Menu.Item key="4">option4</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub2" title={<span><Icon type="laptop" />subnav 2</span>}>
-                    <Menu.Item key="5">option5</Menu.Item>
-                    <Menu.Item key="6">option6</Menu.Item>
-                    <Menu.Item key="7">option7</Menu.Item>
-                    <Menu.Item key="8">option8</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub3" title={<span><Icon type="notification" />subnav 3</span>}>
-                    <Menu.Item key="9">option9</Menu.Item>
-                    <Menu.Item key="10">option10</Menu.Item>
-                    <Menu.Item key="11">option11</Menu.Item>
-                    <Menu.Item key="12">option12</Menu.Item>
-                </SubMenu>
+                    { html }
                 </Menu>
             </Sider>
         )
@@ -41,4 +62,4 @@ class SiderBar extends React.Component{
 }
 
 
-export default SiderBar
+export default withRouter(SiderBar)

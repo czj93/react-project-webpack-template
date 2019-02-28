@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import reducers from '../reducers'
 import Immutable from 'immutable'
 import createHistory from 'history/createHashHistory'
-
+import SidebarConfig from '../config/sidebar'
 
 let store,
     history = createHistory()
@@ -31,14 +31,14 @@ if((window.__REDUX_DEVTOOLS_EXTENSION__ || window.__REDUX_DEVTOOLS_EXTENSION__))
 }
 
 export default store({
-    routing : {
-        history,
-        tabs : {
-            panes : []
+    routing: {
+        nav:{
+            current: ''
         },
-        menus : {
+        menu:{
             openKeys : [],
-            selectedKeys : []
+            selectedKeys : [],
+            config: SidebarConfig
         }
     }
 })

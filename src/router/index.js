@@ -11,15 +11,18 @@ import Home from '../pages/Home/'
 
 
 
-var LoadableTodoList = loadable(() => pMinDelay(import('../pages/TodoList/'),250),{ fallback: <Spin /> })
+const LoadableTodoList = loadable(() => pMinDelay(import('../pages/TodoList/'),250),{ fallback: <Spin /> })
+const LoadableUser = loadable(() => pMinDelay(import('../pages/User/'),250),{ fallback: <Spin /> })
+
 
 // var LoadableTodoList = loadable(() => import('../pages/TodoList/'),{ fallback: <Spin /> })
 class Router extends React.Component {
     render(){
         return (
             <Switch>
-                <Route exact path='/home' component={Home}></Route>
-                <Route exact path="/todolist" component={() => <LoadableTodoList />} ></Route> 
+                <Route path='/home' component={Home}></Route>
+                <Route exact path="/todolist" component={(props) => <LoadableTodoList {...props} />} ></Route> 
+                <Route exact path="/user" component={(props) => <LoadableUser {...props} />} ></Route> 
             </Switch>
         )
     }
