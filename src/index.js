@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
-import AppLayout from './layout.js'
+import AppLayout from './pages/layout.js'
+import { HashRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux'
 import store from './store'
@@ -12,7 +13,9 @@ class App extends React.Component {
     render(){
         return (
             <Provider store={store}>
-                <AppLayout />
+                <HashRouter>
+                    <AppLayout />
+                </HashRouter>
             </Provider>
         )
     }

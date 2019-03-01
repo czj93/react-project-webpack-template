@@ -1,26 +1,48 @@
 import React from 'react'
 import { Menu } from 'antd'
 import { NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux'
+
 class Nav extends React.Component {
     constructor(props){
         super(props)
-        // console.log(props)
     }
     render(){
-        let selectedKey = this.props.location.path ? this.props.location.path : ''
+        const menus = this.props.data.getIn(['menu', 'config']),
+                nav = this.props.data.get('nav');
+        let SelectedKeys = nav ? [nav] : []
+        if(!menus) return null
         return (
             <Menu
                 theme="dark"
                 mode="horizontal"
-                defaultSelectedKeys={[selectedKey]}
+                selectedKeys={SelectedKeys}
                 style={{ lineHeight: '64px' }}
             >
-                <Menu.Item key="/home"><NavLink to="/home">Home</NavLink></Menu.Item>
-                <Menu.Item key="/todolist"><NavLink to="/todolist">TodoList</NavLink></Menu.Item>
-                <Menu.Item key="/user"><NavLink to="/user">用户列表</NavLink></Menu.Item>
+                {
+                    menus.map(item =>  <Menu.Item key={item.get('key')}><NavLink to={item.get('path') || item.get('defaultChildrenPath')} onClick={() => this.props.changeNav(item.get('key'))}>{ item.get('name') }</NavLink></Menu.Item>)
+                }
             </Menu>
         )
     }
 }
 
-export default withRouter(Nav)
+const mapStateToProps = (state, own) => {
+    return {
+        data: state.get('router')
+    }
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeNav(key){
+            dispatch({
+                type: 'CHANGE_NAV',
+                nav: key
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

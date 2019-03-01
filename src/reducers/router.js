@@ -1,15 +1,21 @@
 import { fromJS } from 'immutable'
 const initState = {}
 
-const rout = (state = fromJS(initState),action) => {
+const router = (state = fromJS(initState),action) => {
     switch (action.type){
         case 'ROUTER_CHANGE' :
-            state = state.set('match',action.match)
-            state = state.set('location',action.location)
-            state = state.set('focus',action.focus)
-            state = state.set('bread',action.bread)
+            state = state.set('bread', fromJS(action.bread))
+            state = state.set('openKeys', fromJS(action.openKeys))
+            state = state.set('selectedKeys', fromJS(action.selectedKeys))
             return state
 
+        case 'MENU_OPENKEYS_CHANGE':
+            state = state.set('openKeys', fromJS(action.openKeys))
+        return state
+
+        case 'CHANGE_NAV':
+            state = state.set('nav', action.nav)
+            return state
         case 'TAB_CHANGE' :
             return state
         case 'TAB_ADD' :
@@ -27,4 +33,4 @@ const rout = (state = fromJS(initState),action) => {
     }
 }
 
-export default rout
+export default router

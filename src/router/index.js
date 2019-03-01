@@ -20,9 +20,9 @@ class Router extends React.Component {
     render(){
         return (
             <Switch>
-                <Route path='/home' component={Home}></Route>
+                <Route exact path='/home' component={Home}></Route>
                 <Route exact path="/todolist" component={(props) => <LoadableTodoList {...props} />} ></Route> 
-                <Route exact path="/user" component={(props) => <LoadableUser {...props} />} ></Route> 
+                <Route exact path="/user/:id" component={(props) => <LoadableUser {...props} />} ></Route> 
             </Switch>
         )
     }

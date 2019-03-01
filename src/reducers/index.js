@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux-immutable'
 
 import user from './user'
-import routing from './routing'
+import router from './router'
 
 
 export default combineReducers({
     user,
-    routing
+    router
 })

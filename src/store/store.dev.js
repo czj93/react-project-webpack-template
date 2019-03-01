@@ -31,10 +31,9 @@ if((window.__REDUX_DEVTOOLS_EXTENSION__ || window.__REDUX_DEVTOOLS_EXTENSION__))
 }
 
 export default store({
-    routing: {
-        nav:{
-            current: ''
-        },
+    router: {
+        history,
+        nav:'',
         menu:{
             openKeys : [],
             selectedKeys : [],
