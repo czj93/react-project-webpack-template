@@ -1,6 +1,6 @@
 import React from 'react'
 import { hot } from 'react-hot-loader'
-import { Layout, Breadcrumb } from 'antd'
+import { Layout } from 'antd'
 import { withRouter } from 'react-router-dom';
 // import Layout from 'antd/lib/layout'
 
@@ -11,6 +11,7 @@ import { routerChange } from '../lib/common'
 const { Header, Content } = Layout;
 
 import Router from '../router'
+import Bread from '../components/Bread'
 
 require('../assets/css/index.css')
 
@@ -35,11 +36,7 @@ class AppLayout extends React.Component {
                 <Layout>
                     <SiderBar />
                     <Layout style={{ padding: '0 24px 24px', minHeight: '960px' }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>List</Breadcrumb.Item>
-                            <Breadcrumb.Item>App</Breadcrumb.Item>
-                        </Breadcrumb>
+                        <Bread />
                         <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }} >
                             <Router />
                         </Content>

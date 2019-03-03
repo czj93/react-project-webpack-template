@@ -7,6 +7,7 @@ const router = (state = fromJS(initState),action) => {
             state = state.set('bread', fromJS(action.bread))
             state = state.set('openKeys', fromJS(action.openKeys))
             state = state.set('selectedKeys', fromJS(action.selectedKeys))
+            state = state.set('nav', action.nav)
             return state
 
         case 'MENU_OPENKEYS_CHANGE':

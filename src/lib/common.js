@@ -39,15 +39,17 @@ export const routerChange = (nextProps) => {
     var menus = store.getState().getIn(['router', 'menu', 'config']).toJS();
     // console.log(menus)
     var pathname = nextProps.location.pathname
-
+    
     var breadPath = _findMenu(menus, pathname)
     var openKeys = breadPath.length > 2 ? breadPath.slice(1, breadPath.length - 1) : []
     var selectedKeys = breadPath.length > 1 ? breadPath.slice(breadPath.length - 1) : []
+    var nav = breadPath.length > 1 ? breadPath[0].key : ''
     store.dispatch({
         type: 'ROUTER_CHANGE',
         selectedKeys: selectedKeys.map(item => item.key),
         openKeys: openKeys.map(item => item.key),
-        bread: breadPath
+        bread: breadPath,
+        nav: nav
     })
     
 }
