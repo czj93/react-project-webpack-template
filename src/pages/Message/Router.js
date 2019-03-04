@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom'
 
 
 const LoadableMessageSite = Loadable({ loader:() => import('./MessageSite/MessageSite'), loading: () => <Spin /> })
+const LoadableQuestionnaireManage = Loadable({ loader: () => import('./QuestionnaireManage/QuestionnaireManage'), loading: () => <Spin /> })
 
 
 class Router extends React.Component{
@@ -17,6 +18,7 @@ class Router extends React.Component{
         return (
             <Switch>
                 <Route exact path='/message/site' component={LoadableMessageSite}></Route>
+                <Route exact path='/message/questionnaire' component={LoadableQuestionnaireManage}></Route> 
             </Switch>
         )
     }

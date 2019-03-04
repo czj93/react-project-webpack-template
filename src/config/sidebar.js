@@ -28,6 +28,8 @@ const SideBarConfig = [
             { name: '培训需求调研', key: 'train:demand', path: '/train/demand' },
             { name: '会员培训需求反应', key: 'train:member', path: '/train/member' }
         ] 
+    },{
+        name: '用户列表', key: 'user', path: '/user',
     }
 ]
 

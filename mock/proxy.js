@@ -7,7 +7,7 @@ const sets = {
 }
 
 const proxy = {
-    // '^/a/*': sets
+    '^/a/*': sets
 }
 
 
