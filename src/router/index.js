@@ -10,8 +10,9 @@ import Home from '../pages/Home/'
 
 
 
-const LoadableTodoList = Loadable({ loader:() => import('../pages/TodoList/'), loading: () => <Spin /> })
-const LoadableUser = Loadable({ loader:() => import('../pages/User/'), loading: () => <Spin /> })
+const LoadableTodoList = Loadable({ loader:() => import(/* webpackChunkName: "TodoList" */'../pages/TodoList/'), loading: () => <Spin /> })
+const LoadableUser = Loadable({ loader:() => import(/* webpackChunkName: "User" */'../pages/User/'), loading: () => <Spin /> })
+const LoadableMessage = Loadable({ loader:() => import(/* webpackChunkName: "Message" */'../pages/Message/Message'), loading: () => <Spin /> })
 
 
 
@@ -21,7 +22,8 @@ class Router extends React.Component {
             <Switch>
                 <Route exact path='/home' component={Home}></Route>
                 <Route exact path="/todolist" component={LoadableTodoList} ></Route> 
-                <Route exact path="/user/:id" component={LoadableUser} ></Route> 
+                <Route exact path="/user" component={LoadableUser} ></Route> 
+                <Route path="/message" component={LoadableMessage}></Route>
             </Switch>
         )
     }

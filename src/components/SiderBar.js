@@ -1,6 +1,7 @@
 import React from 'react'
-import { Layout, Menu, Icon } from 'antd'
-import { NavLink, withRouter } from 'react-router-dom';
+import Menu from 'antd/lib/menu'
+import Layout from 'antd/lib/layout'
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
 import SiderBarConfig from '../config/sidebar'
 
@@ -15,8 +16,42 @@ class SiderBar extends React.Component{
         this.state = {
             menu: SiderBarConfig
         }
+
+        var menus = SiderBarConfig.find(item => item.key == props.nav)
+
+        if(menus && menus.children){
+            let result = this.findChildPage(menus.children)
+            
+            if(result.url) props.router.toJS().history.replace(result.url)
+            this.state.defaultOpenKeys = result.defaultOpenKeys
+            this.state.defaultSelectedKeys = result.defaultSelectedKeys
+        }
     }
 
+    findChildPage(menus){
+        var childPage, defaultOpenKeys = [], defaultSelectedKeys = []; 
+        const ex = (arr) => {
+            if(!arr || !arr.length) return 
+            for(let i =0 ; i < arr.length; i++){
+                if(childPage) return 
+                let item = arr[i]
+                defaultOpenKeys.push(item.key)
+                if(item.path){
+                    childPage = item.path
+                    defaultSelectedKeys.push(item.key)
+                    return 
+                }
+                if(item.children && item.children.length && !childPage){
+                    ex(item.children)
+                }
+                if(!childPage) defaultOpenKeys.pop()
+            }
+        }
+        ex(menus)
+
+        return { url: childPage,  defaultOpenKeys , defaultSelectedKeys}
+    }
+ 
 
     formSubmenusChild(item){
         let cHtml;
@@ -42,13 +77,8 @@ class SiderBar extends React.Component{
 
 
     render(){
-        var curMenu = this.state.menu.find(item => item.key == this.props.router.get('nav') ) || []
-        let html = '',
-            openKeys = this.props.router.get('openKeys'),
-            selectedKeys = this.props.router.get('selectedKeys');
-
-            openKeys = openKeys ? openKeys.toJS() : [];
-            selectedKeys = selectedKeys ? selectedKeys.toJS() : []
+        var curMenu = this.state.menu.find(item => item.key == this.props.nav ) || []
+        let html = '', { defaultOpenKeys, defaultSelectedKeys } = this.state;
 
         html = curMenu.children && curMenu.children.map((item,i)=> {
             return this.formSubmenusChild(item);
@@ -60,12 +90,9 @@ class SiderBar extends React.Component{
             <Sider width={200} style={{ background: '#fff' }}>
                 <Menu
                     mode="inline"
-                    // defaultOpenKeys={openKeys}
-                    // defaultSelectedKeys={selectedKeys}
-                    openKeys={openKeys}
-                    selectedKeys={selectedKeys}
+                    defaultOpenKeys={defaultOpenKeys}
+                    defaultSelectedKeys={defaultSelectedKeys}
                     style={{ height: '100%', borderRight: 0 }}
-                    onOpenChange={ (openKeys) => this.props.changeOpenKeys(openKeys) }
                 >
                     { html }
                 </Menu>

@@ -1,13 +1,23 @@
-const proxy = {}
-
 const sets = {
-    target: 'http://xxx.com',
-    changeOrigin: true
+    target: 'http://zjzqyxh.epro.cc',
+    changeOrigin: true,
+    cookieDomainRewrite:{
+        '*':'localhost'
+    }
 }
+
+const proxy = {
+    // '^/a/*': sets
+}
+
+
 
 const publicPath = ''
 
-proxy[ publicPath + '/' ] = sets
+proxy['/a/login'] = sets
+
+proxy['/a/epro/letter/securities/all'] = sets
+
 
 
 module.exports = proxy

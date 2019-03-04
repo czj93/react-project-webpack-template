@@ -2,7 +2,7 @@ const SideBarConfig = [
     {
         name: '首页', key: 'home', path: '/home'
     },{
-        name: '站内信', key: 'message', defaultChildrenPath: '/message/site',  children:[
+        name: '站内信', key: 'message', path: '/message',  children:[
             { name: '网站通知', key: 'message:site', path: '/message/site' },
             { name: '问卷管理', key: 'message:questionnaire', path: '/message/questionnaire'},
             { 
@@ -23,7 +23,7 @@ const SideBarConfig = [
         ]
     },
     { 
-        name: '培训报名', key: 'train', defaultChildrenPath: '/train/manage',  children:[
+        name: '培训报名', key: 'train', path: '/train',  children:[
             { name: '培训管理', key: 'train:manage', path: '/train/manage' },
             { name: '培训需求调研', key: 'train:demand', path: '/train/demand' },
             { name: '会员培训需求反应', key: 'train:member', path: '/train/member' }

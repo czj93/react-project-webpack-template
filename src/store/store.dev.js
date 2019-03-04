@@ -33,11 +33,6 @@ if((window.__REDUX_DEVTOOLS_EXTENSION__ || window.__REDUX_DEVTOOLS_EXTENSION__))
 export default store({
     router: {
         history,
-        nav:'',
-        menu:{
-            openKeys : [],
-            selectedKeys : [],
-            config: SidebarConfig
-        }
+        menus: SidebarConfig
     }
 })

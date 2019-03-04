@@ -1,13 +1,14 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
-
+import { Menu } from 'antd'
+import { NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux'
 
 class Nav extends React.Component {
     constructor(props){
         super(props)
     }
     render(){
-        const menus = this.props.data.getIn(['menu', 'config'])
+        const menus = this.props.data.get('menus')
         return (
             <nav className="g-nav">
                 {
@@ -18,5 +19,11 @@ class Nav extends React.Component {
     }
 }
 
+const mapStateToProps = (state, own) => {
+    return {
+        data: state.get('router')
+    }
+}
 
-export default Nav
+
+export default connect(mapStateToProps)(Nav)

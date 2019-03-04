@@ -11,6 +11,11 @@ class UserContainer extends React.Component {
 
     componentWillMount(){
        this.props.axiosUserList()
+       this.props.axiosLetter().then((data) => {
+           console.log(data)
+       })
+
+    //    UserServer.axiosLogin()
     }
 
     render(){
@@ -31,6 +36,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         axiosUserList: () => {
             return dispatch(UserServer.axiosUserList())
+        },
+        axiosLetter: () => {
+            return dispatch(UserServer.axiosLetter())
         }
     }
 }
