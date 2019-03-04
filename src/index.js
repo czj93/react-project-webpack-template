@@ -22,6 +22,7 @@ class App extends React.Component {
 }
 
 require('./assets/css/_reset.less')
+require('antd/dist/antd.css')
 
 render(<App />, document.getElementById('root'), () => {
     console.log('渲染完成')

@@ -13,16 +13,16 @@ const { Header, Content } = Layout;
 import Router from '../router'
 import Bread from '../components/Bread'
 
-require('../assets/css/index.css')
+require('../assets/css/index.less')
 
 class AppLayout extends React.Component {
     constructor(props){
         super(props)
-        routerChange(props)
+        // routerChange(props)
     }
 
     shouldComponentUpdate(nextProps){
-        routerChange(nextProps)
+        // routerChange(nextProps)
         return true
     }
 
@@ -31,7 +31,7 @@ class AppLayout extends React.Component {
             <Layout>
                 <Header className="header">
                     <div className="logo" >浙江证券业协会</div>
-                    <Nav />
+                    <Nav path={this.props.location.pathname} />
                 </Header>
                 <Layout>
                     <SiderBar />

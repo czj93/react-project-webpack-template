@@ -1,0 +1,26 @@
+.logo {
+    display: flex; justify-content: flex-start; align-items: center;
+    width: 120px;height: 30px;background: rgba(83, 9, 9, 0.2);  margin: 16px 28px 16px 0;float: left;
+    color: #fe0119;
+}
+
+.list{
+    margin-top: 30px;
+}
+.list li{
+    list-style-type: disc; margin-left: 20px;
+}
+.ml5{ margin-left: 5px; }
+
+.g-nav{
+    a{
+        line-height: 64px; display: inline-block; padding: 0 20px; color: rgba(255,255,255,0.65); user-select: none;
+        transition: color .3s cubic-bezier(.645, .045, .355, 1),border-color .3s cubic-bezier(.645, .045, .355, 1),background .3s cubic-bezier(.645, .045, .355, 1),padding .15s cubic-bezier(.645, .045, .355, 1);
+        &:hover{
+            color: #fff;
+        }
+        &.active{
+            background: #1890ff;color: #fff;text-decoration: none;
+        }
+    }
+}
