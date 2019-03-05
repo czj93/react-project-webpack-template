@@ -2,6 +2,7 @@ import React from 'react'
 import Table from 'antd/lib/table'
 import MessageServer from '../MessageServer'
 import { connect } from 'react-redux'
+import { removeAllTag } from '../../../lib/utils'
 
 class MessageSite extends React.Component {
     constructor(props){
@@ -20,7 +21,7 @@ class MessageSite extends React.Component {
             title: '内容',
             width: 400,
             dataIndex: 'content',
-            render: (text, record) => text ? <p className="ellipsis w300">{text}</p> : <span className="u-no">无</span>
+            render: (text, record) => text ? <p className="ellipsis w300">{ removeAllTag(text) }</p> : <span className="u-no">无</span>
         },{
             title: '创建时间',
             dataIndex: 'createDate',
@@ -40,14 +41,17 @@ class MessageSite extends React.Component {
     }
 
     componentWillMount(){
-        this.props.axiosList()
+        this.props.axiosList(1)
     }
 
     render(){
         if(!this.props.data.get('list')) return null
-        const query = this.props.data.get('query')
+        const query = this.props.data.get('query').toJS()
         return(
             <div>
+                <div className="content-title">
+                    <span className="t">网站通知</span>
+                </div>
                 <Table bordered
                        size="middle"
                        rowKey={ record => record.id }
@@ -57,9 +61,9 @@ class MessageSite extends React.Component {
                            pageSize: query.pageSize,
                            current : query.current,
                            total: query.totalCount,
-                           onChange:(page) => {
-                            //    this.props.axiosPageChange(page)
-                            //    this.props.axiosUserInfoList()
+                           onChange:(current) => {
+                               this.props.queryChange({current})
+                               this.props.axiosList()
                            }
                        }}
                 ></Table>
@@ -76,8 +80,14 @@ const mapStateToProps = (state, own) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        axiosList: () => {
-            return dispatch(MessageServer.axiosList())
+        axiosList: (page) => {
+            return dispatch(MessageServer.axiosList(page))
+        },
+        queryChange: (query) => {
+            return dispatch({
+                type: 'LIST_QUERY_CHANGE',
+                query: query
+            })
         }
     }
 }

@@ -15,7 +15,7 @@ class UserContainer extends React.Component {
            console.log(data)
        })
 
-    //    UserServer.axiosLogin()
+       UserServer.axiosLogin()
     }
 
     render(){
