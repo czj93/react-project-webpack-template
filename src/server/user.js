@@ -63,7 +63,7 @@ class Server {
                     password: 'admin'
                 },
                 callback:(json) => {
-                    console.log(json)
+                    // console.log(json)
                     resolve(json)
                 }
             })()
