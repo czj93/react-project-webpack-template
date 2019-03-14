@@ -1,13 +1,18 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 
 import { Button, message } from 'antd';
 
 import ChildComponet from './ChildComponent'
 import LifeCycle from './LifeCycle'
+import ReduxInReact from './ReduxInReact'
 
 const Title = (props) => {
     return <h1>Hello {props.name}</h1>
+}
+
+const ContentStyle= {
+    marginTop: 20
 }
 
 class Home extends React.Component {
@@ -16,15 +21,11 @@ class Home extends React.Component {
         super(props)
         this.state = {
             count: 0,
-            list: [ { key: 1, name: '32212' }, { key: 2, name: '234545' }, { key: 3, name: '22332' }]
+            text: '',
+            list: [ { key: 1, text: '1' }, { key: 2, text: '2' }, { key: 3, text: '3' }]
         }
 
         // this.add = this.add.bind(this)
-    }
-
-    handleClick = () => {
-        // this 指向当前的 组件实例
-        message.info('show message');
     }
 
     add(){
@@ -40,25 +41,52 @@ class Home extends React.Component {
         })
     }
 
+    handleChange =  (e) =>  {
+        this.setState({ text: e.target.value });
+    }
+
+    handleSubmit = (e) => {
+        if(e.keyCode != 13) return 
+        let newItem = {
+            text: this.state.text,
+            key: Date.now()
+        }
+        this.setState(prevState => ({
+            list: prevState.list.concat(newItem),
+            text: ''
+        }));
+    }
+
     render(){
         const { list, count } = this.state
         return (
             <div style={{ padding: 20  }}>
                 <Title name="world" />
                 <p>count: {count}</p>
-                <Button type="primary" onClick={() => { alert('click') }}>Click me</Button>
-                <Button type="primary" className="ml5" onClick={this.handleClick}>Click me</Button>
                 <Button type="primary" className="ml5" onClick={(e) => this.add(e)}>Add</Button>
                 <ul className="list">
                 {
-                    list.map((item) => <li key={item.key}>{item.name}</li>)
+                    list.map((item) => <li key={item.key}>{item.text}</li>)
                 }
                 </ul>
-                <LifeCycle count={count} add={this.childClickCallback} />
 
-                <a href="/redux.html">Redux example</a>
+               <div style={ContentStyle}>
+                    <input onChange={this.handleChange} value={this.state.text} onKeyDown={this.handleSubmit} />
+               </div>
+
+                <div style={ContentStyle}>
+                    <LifeCycle count={count} add={this.childClickCallback} />
+                </div>
                 
+
+                <div style={ContentStyle}>
+                    <a href="/redux.html">Redux example</a> <br />
+                    <Link to="/home/redux" >Redux 在 React 中的应用</Link>
+                </div>
+                
+
                 <Route path='/home/child' component={ChildComponet}  />
+                <Route path='/home/redux' component={ReduxInReact}  />
             </div>
         )
     }

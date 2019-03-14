@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Button } from 'antd';
 // 创建阶段（Mounting）、运行和交互阶段（Updating）、卸载阶段（Unmounting）
 
 class LifeCycle extends React.Component{
@@ -45,7 +45,9 @@ class LifeCycle extends React.Component{
             <div>
                 LifeCycle : count = {count}
 
-                <button onClick={this.props.add}>子组件更新父组件数据</button>
+                <div>
+                    <Button type="primary" onClick={this.props.add}>子组件更新父组件数据</Button>
+                </div>
             </div>
         )
     }

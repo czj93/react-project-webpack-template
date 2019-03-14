@@ -7,7 +7,8 @@ const initState = {
         nickname: ''
     },
     templateId: '',
-    list:[]
+    list:[],
+    count: 0
 }
 
 const user = (state = fromJS(initState), action) => {
@@ -32,6 +33,10 @@ const user = (state = fromJS(initState), action) => {
             state = state.setIn(['filter', 'page'], action.page)
         return state
         
+        case 'ADD_USER_COUNT':
+            let count = state.get('count')
+            state = state.set('count', count+1)
+        return state
         default: 
             return state
     }

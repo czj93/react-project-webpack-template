@@ -20,7 +20,7 @@ class Router extends React.Component {
     render(){
         return (
             <Switch>
-                <Route exact path='/home' component={Home}></Route>
+                <Route  path='/home' component={Home}></Route>
                 <Route exact path="/todolist" component={LoadableTodoList} ></Route> 
                 <Route exact path="/user" component={LoadableUser} ></Route> 
                 <Route path="/message" component={LoadableMessage}></Route>
